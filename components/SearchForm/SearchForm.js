@@ -22,7 +22,7 @@ import { SearchResults } from '../SearchResults/SearchResults';
 
 export const SearchForm = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState(null);
 
   const getResults = async () => {
     try {
@@ -43,10 +43,7 @@ export const SearchForm = () => {
       <Form>
         <Item floatingLabel>
           <Label>Search for beers</Label>
-          <Input
-            testID="text-input"
-            onChangeText={text => setSearchTerm(text)}
-          />
+          <Input testID="text-input" onChangeText={setSearchTerm} />
         </Item>
         <Button {...buttonProps}>
           <Text>Search</Text>

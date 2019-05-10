@@ -9,7 +9,20 @@ exports[`SearchResults renders correctly 1`] = `
       "height": 1334,
     }
   }
-/>
+>
+  <Text
+    style={
+      Object {
+        "color": "#000",
+        "fontFamily": "System",
+        "fontSize": 16,
+      }
+    }
+    uppercase={false}
+  >
+    no results 😿
+  </Text>
+</View>
 `;
 
 exports[`SearchResults renders correctly with results 1`] = `

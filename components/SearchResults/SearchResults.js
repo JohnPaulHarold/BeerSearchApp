@@ -19,16 +19,16 @@ export const SearchResults = props => {
 
   return (
     <Container>
-      {results.length > 0 ? (
-        <Fragment>
-          <FlatList
-            style={s.resultsList}
-            data={results}
-            keyExtractor={item => `${item.id}`}
-            renderItem={renderItem}
-          />
-        </Fragment>
-      ) : null}
+      {!results ? null : results.length === 0 ? (
+        <Text>no results 😿</Text>
+      ) : (
+        <FlatList
+          style={s.resultsList}
+          data={results}
+          keyExtractor={item => `${item.id}`}
+          renderItem={renderItem}
+        />
+      )}
     </Container>
   );
 };

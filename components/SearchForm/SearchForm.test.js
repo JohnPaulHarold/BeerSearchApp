@@ -21,7 +21,7 @@ describe('SearchForm', () => {
     expect(render).toMatchSnapshot();
   });
 
-  it('should call searchBeersByName', async () => {
+  it('should call searchBeersByName', async done => {
     const { getByType, getByTestId } = render(<SearchForm />);
     const inputEl = getByTestId('text-input');
     const buttonEl = getByType(Button);
@@ -32,6 +32,7 @@ describe('SearchForm', () => {
     fireEvent.press(buttonEl);
 
     expect(await searchBeersByName).toHaveBeenCalledWith(SEARCH_TERM);
+    done();
     // });
   });
 });
