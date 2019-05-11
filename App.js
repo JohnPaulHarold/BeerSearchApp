@@ -4,58 +4,34 @@
  *
  * @format
  */
-
 import React from 'react';
-// import { AppStyles } from './App.styles';
-import { Platform } from 'react-native';
-import {
-  Container,
-  Header,
-  Left,
-  Right,
-  Button,
-  Icon,
-  Body,
-  Content,
-  Text,
-  Title,
-  Footer,
-  FooterTab
-} from 'native-base';
-import { SearchForm } from './components/SearchForm/SearchForm';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloProvider } from 'react-apollo';
+import fetch from 'node-fetch';
+import { createHttpLink } from 'apollo-link-http';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu'
+import { RootComponent } from './components/RootComponent/RootComponent';
+
+console.log('GRAPHQL_ADDRESS %o', process.env.GRAPHQL_ADDRESS);
+const uri = 'http://10.0.2.2:5000/graphql';
+
+const link = createHttpLink({
+  uri,
+  fetch
+});
+
+const cache = new InMemoryCache();
+
+const client = new ApolloClient({
+  link,
+  cache
 });
 
 export const App = () => {
   return (
-    <Container>
-      <Header>
-        <Left>
-          <Button transparent>
-            <Icon name="menu" />
-          </Button>
-        </Left>
-        <Body>
-          <Title>Header</Title>
-        </Body>
-        <Right />
-      </Header>
-      <Content>
-        <Text>{instructions}</Text>
-        <SearchForm />
-      </Content>
-      <Footer>
-        <FooterTab>
-          <Button full>
-            <Text>Footer</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
-    </Container>
+    <ApolloProvider client={client}>
+      <RootComponent />
+    </ApolloProvider>
   );
 };

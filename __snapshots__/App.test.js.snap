@@ -358,6 +358,7 @@ Cmd+D or shake for dev menu
                 "shadowRadius": undefined,
               }
             }
+            testID="search-btn"
           >
             <Text
               style={

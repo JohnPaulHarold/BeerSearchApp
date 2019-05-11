@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RootComponent renders correctly 1`] = `
+<Styled(Container)>
+  <Styled(Header)>
+    <Styled(Left)>
+      <Styled(Button)
+        transparent={true}
+      >
+        <Styled(Icon)
+          name="menu"
+        />
+      </Styled(Button)>
+    </Styled(Left)>
+    <Styled(Body)>
+      <Styled(Title)>
+        Header
+      </Styled(Title)>
+    </Styled(Body)>
+    <Styled(Right) />
+  </Styled(Header)>
+  <Styled(Content)>
+    <Styled(Text)>
+      Press Cmd+R to reload,
+Cmd+D or shake for dev menu
+    </Styled(Text)>
+    <SearchForm />
+  </Styled(Content)>
+  <Styled(Footer)>
+    <Styled(FooterTab)>
+      <Styled(Button)
+        full={true}
+      >
+        <Styled(Text)>
+          Footer
+        </Styled(Text)>
+      </Styled(Button)>
+    </Styled(FooterTab)>
+  </Styled(Footer)>
+</Styled(Container)>
+`;
