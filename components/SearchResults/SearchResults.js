@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { AppRegistry, FlatList } from 'react-native';
-import { Container, Text, View, ListItem } from 'native-base';
+import { Container, Text, ListItem } from 'native-base';
 import { SearchResultsStyles as s } from './SearchResults.style';
 
 export const SearchResults = props => {
@@ -8,7 +8,7 @@ export const SearchResults = props => {
 
   const renderItem = listItem => {
     const { item } = listItem;
-    const { name, image_url } = item;
+    const { name } = item;
 
     return (
       <ListItem>

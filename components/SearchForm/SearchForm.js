@@ -7,50 +7,47 @@
 
 import React, { useState } from 'react';
 import { AppRegistry } from 'react-native';
-import {
-  Content,
-  Form,
-  Item,
-  Label,
-  Input,
-  Button,
-  Text,
-  Container
-} from 'native-base';
-import { searchBeersByName } from '../../api/beer';
+import { Form, Item, Label, Input, Button, Text, Container } from 'native-base';
 import { SearchResults } from '../SearchResults/SearchResults';
+import { ApolloConsumer } from 'react-apollo';
+import { GET_BEERS_BY_NAME } from '../../queries/getBeersByName';
 
 export const SearchForm = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState(null);
 
-  const getResults = async () => {
-    try {
-      const results = await searchBeersByName(searchTerm);
-      setResults(results);
-    } catch (e) {
-      console.error(e.message);
-    }
-  };
-
-  const buttonProps = {
-    disabled: searchTerm === '',
-    onPress: getResults
-  };
-
   return (
-    <Container>
-      <Form>
-        <Item floatingLabel>
-          <Label>Search for beers</Label>
-          <Input testID="text-input" onChangeText={setSearchTerm} />
-        </Item>
-        <Button {...buttonProps}>
-          <Text>Search</Text>
-        </Button>
-      </Form>
-      <SearchResults results={results} />
-    </Container>
+    <ApolloConsumer>
+      {client => (
+        <Container>
+          <Form>
+            <Item floatingLabel>
+              <Label>Search for beers</Label>
+              <Input testID="text-input" onChangeText={setSearchTerm} />
+            </Item>
+            <Button
+              testID="search-btn"
+              disabled={searchTerm === ''}
+              onPress={async () => {
+                try {
+                  const { data } = await client.query({
+                    query: GET_BEERS_BY_NAME,
+                    variables: { name: searchTerm }
+                  });
+
+                  setResults(data.beers);
+                } catch (e) {
+                  console.error(e.message);
+                }
+              }}
+            >
+              <Text>Search</Text>
+            </Button>
+          </Form>
+          <SearchResults results={results} />
+        </Container>
+      )}
+    </ApolloConsumer>
   );
 };
 
